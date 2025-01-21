@@ -2,6 +2,7 @@ import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
 import { fetchData } from "./Genre";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export const Popular = async () => {
   const popular = "/movie/popular?language=en-US&page=1";
@@ -25,12 +26,14 @@ export const Popular = async () => {
             return (
               <div key={index} className="rounded-lg overflow-hidden">
                 <div>
-                  <img
-                    className="h-[340px] w-[230px] "
+                  <Image
                     src={ConImg + movie?.poster_path}
                     alt=""
+                    className="h-[340px] w-[230px] "
+                    width={500}
+                    height={500}
                   />
-                </div>{" "}
+                </div>
                 <div className="p-2 flex flex-col items-start w-[230px] bg-[#F4F4F5] ">
                   <h3 className="text-[14px] flex gap-1 mt-1 ">
                     <img src="/star.svg" alt="" />
@@ -41,7 +44,7 @@ export const Popular = async () => {
               </div>
             );
           })}
-      </div>{" "}
+      </div>
     </div>
   );
 };

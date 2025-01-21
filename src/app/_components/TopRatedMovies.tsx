@@ -2,6 +2,7 @@ import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
 import { fetchData } from "./Genre";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export const TopRated = async () => {
   const topRated = "/movie/top_rated?language=en-US&page=1";
@@ -26,10 +27,12 @@ export const TopRated = async () => {
             return (
               <div key={index} className="rounded-lg overflow-hidden">
                 <div>
-                  <img
-                    className="h-[340px] w-[230px] "
+                  <Image
                     src={ConImg + movie?.poster_path}
                     alt=""
+                    className="h-[340px] w-[230px] "
+                    width={500}
+                    height={500}
                   />
                 </div>{" "}
                 <div className="p-2 flex flex-col items-start w-[230px] bg-[#F4F4F5] ">
