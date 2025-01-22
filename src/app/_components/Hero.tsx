@@ -17,20 +17,26 @@ export const Hero = async () => {
             return (
               <div key={index} className="">
                 <div
-                  className="relative"
-                  // className={`bg-[url(${
-                  //   ConImg + movie?.backdrop_path
-                  // })] h-[600px] w-full `}
+                  // className="relative  "
+                  className="w-[100vw] h-[600px] relative "
+                  style={{
+                    backgroundImage: `url(${ConImg + movie?.backdrop_path}) `,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
                 >
-                  <Image
+                  {/* <Image
                     src={ConImg + movie?.backdrop_path}
-                    className="h-[600px] w-[100%] bg-custom-gradient bg-cover bg-center bg-no-repeat "
+                    className="h-[600px] w-[100vw] bg-custom-gradient bg-cover bg-center bg-no-repeat "
                     alt=""
                     width={500}
                     height={600}
-                  />
+                  /> */}
 
-                  <div className="absolute left-[140px] top-[178px]">
+                  <div className=" w-[100vw] h-[600px] bg-[#000]/20 absolute"></div>
+
+                  <div className=" left-[140px] top-[178px] absolute ">
                     <h3 className="text-4 text-white font-[400] leading-[24px] ">
                       Now Playing:
                     </h3>
