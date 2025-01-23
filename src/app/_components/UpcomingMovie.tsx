@@ -10,6 +10,10 @@ export const Upcoming = async () => {
 
   const upcomingMovies = await fetchData(upcoming);
 
+  // const genres = "/genre/movie/list?language=en";
+
+  // const results = await fetchData(genres);
+
   return (
     <div className=" max-w-[1277px] w-full m-auto mt-[52px]">
       <div className="flex justify-between w-full  ">
@@ -26,7 +30,6 @@ export const Upcoming = async () => {
           .map((movie: MovieType, index: number) => {
             return (
               <Link href={`/movieInfo/${movie.original_title}`}>
-                {/* <Link href="/movieInfo/huh"> */}
                 <div key={index} className="rounded-lg overflow-hidden">
                   <div>
                     <Image

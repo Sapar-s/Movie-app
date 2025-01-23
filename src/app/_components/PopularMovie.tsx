@@ -25,7 +25,7 @@ export const Popular = async () => {
           .slice(0, 10)
           .map((movie: MovieType, index: number) => {
             return (
-              <Link href="/movieInfo/test">
+              <Link href={`/movieInfo/${movie.original_title}`}>
                 <div key={index} className="rounded-lg overflow-hidden">
                   <div>
                     <Image
