@@ -3,6 +3,7 @@ import { MovieType } from "@/utils/types";
 import { fetchData } from "./Genre";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Upcoming = async () => {
   const upcoming = "/movie/upcoming?language=en-US&page=1";
@@ -24,24 +25,27 @@ export const Upcoming = async () => {
           .slice(0, 10)
           .map((movie: MovieType, index: number) => {
             return (
-              <div key={index} className="rounded-lg overflow-hidden">
-                <div>
-                  <Image
-                    src={ConImg + "w500/" + movie?.poster_path}
-                    alt=""
-                    className="h-[340px] w-[230px] "
-                    width={500}
-                    height={500}
-                  />
+              <Link href={`/movieInfo/${movie.original_title}`}>
+                {/* <Link href="/movieInfo/huh"> */}
+                <div key={index} className="rounded-lg overflow-hidden">
+                  <div>
+                    <Image
+                      src={ConImg + "w500/" + movie?.poster_path}
+                      alt=""
+                      className="h-[340px] w-[230px] "
+                      width={500}
+                      height={500}
+                    />
+                  </div>
+                  <div className="p-2 flex flex-col items-start w-[230px] bg-[#F4F4F5] h-[95px]">
+                    <h3 className="text-[14px] flex gap-1 mt-1 ">
+                      <img src="/star.svg" alt="" />
+                      {movie?.vote_average}/10
+                    </h3>
+                    <h2 className="text-[18px] ">{movie?.original_title}</h2>
+                  </div>
                 </div>
-                <div className="p-2 flex flex-col items-start w-[230px] bg-[#F4F4F5] ">
-                  <h3 className="text-[14px] flex gap-1 mt-1 ">
-                    <img src="/star.svg" alt="" />
-                    {movie?.vote_average}/10
-                  </h3>
-                  <h2 className="text-[18px] ">{movie?.original_title}</h2>
-                </div>
-              </div>
+              </Link>
             );
           })}
       </div>

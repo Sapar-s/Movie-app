@@ -9,11 +9,11 @@ export const Footer = () => {
             <img src="/filmLogoW.svg" alt="" />
             <h3 className="text-[#fafafa] text-base font-[700] ">Movie Z</h3>
           </div>
-          <p className="text-[14px] font-[400] leading-[20px] text-[#fafafa] ">
+          <p className="text-[14px] font-[400] leading-[20px] text-[#fafafa] mt-3 ">
             © 2024 Movie Z. All Rights Reserved.
           </p>
         </div>
-        <div className="flex">
+        <div className="flex gap-24">
           <div>
             <h4 className="text-[14px] text-[#fafafa]">Contact Information</h4>
             <div className="flex items-center gap-3 mt-3">
@@ -38,7 +38,7 @@ export const Footer = () => {
           </div>
           <div>
             <h4 className="text-[14px] text-[#fafafa]">Follow us</h4>
-            <div className="flex mt-3">
+            <div className="flex mt-3 gap-3">
               <h5 className="text-14px font-[500] leading-[20px] text-[#fafafa]">
                 Facebook
               </h5>

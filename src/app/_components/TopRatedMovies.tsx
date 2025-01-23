@@ -35,7 +35,7 @@ export const TopRated = async () => {
                     height={500}
                   />
                 </div>{" "}
-                <div className="p-2 flex flex-col items-start w-[230px] bg-[#F4F4F5] ">
+                <div className="p-2 flex flex-col items-start w-[230px] bg-[#F4F4F5] h-[95px]">
                   <h3 className="text-[14px] flex gap-1 mt-1 ">
                     <img src="/star.svg" alt="" />
                     {movie?.vote_average}/10
