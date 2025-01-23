@@ -1,3 +1,4 @@
+import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Hero } from "./Hero";
 import { Popular } from "./PopularMovie";
@@ -12,6 +13,7 @@ export const HomePage = () => {
       <Upcoming />
       <Popular />
       <TopRated />
+      <Footer />
     </div>
   );
 };
