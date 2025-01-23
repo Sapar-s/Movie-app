@@ -10,16 +10,16 @@ export const Popular = async () => {
   const popularMovies = await fetchData(popular);
 
   return (
-    <div>
+    <div className=" max-w-[1277px] w-full m-auto mt-[52px]">
       <div className="flex justify-between w-full ">
         <h2 className="text-[24px] text-[#09090B] font-[600] leading-8 ">
           Popular
         </h2>
-        <button className="flex text-[14px] items-center  ">
+        <button className="flex text-[14px] items-center gap-2 ">
           See more <ArrowRight className="w-4 h-4 " />
         </button>
       </div>
-      <div className="  flex flex-wrap gap-6 justify-center  ">
+      <div className="  flex flex-wrap gap-[31px] justify-center mt-9 ">
         {popularMovies.results
           .slice(0, 10)
           .map((movie: MovieType, index: number) => {
@@ -27,7 +27,7 @@ export const Popular = async () => {
               <div key={index} className="rounded-lg overflow-hidden">
                 <div>
                   <Image
-                    src={ConImg + movie?.poster_path}
+                    src={ConImg + "w500/" + movie?.poster_path}
                     alt=""
                     className="h-[340px] w-[230px] "
                     width={500}
