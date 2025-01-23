@@ -1,7 +1,7 @@
 import { ConImg } from "@/utils/constants";
 import { fetchData } from "./Genre";
 import { MovieType } from "@/utils/types";
-import Image from "next/image";
+
 import {
   Carousel,
   CarouselContent,
@@ -28,7 +28,6 @@ export const Hero = async () => {
                   <div key={index} className="">
                     <CarouselItem>
                       <div
-                        // className="relative  "
                         className="w-[100vw] h-[600px] relative "
                         style={{
                           backgroundImage: `url(${
