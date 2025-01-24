@@ -1,6 +1,7 @@
 import { Footer } from "@/app/_components/Footer";
 import { fetchData } from "@/app/_components/Genre";
 import { Header } from "@/app/_components/Header";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ConImg } from "@/utils/constants";
 import { Genre, MovieType } from "@/utils/types";
 import { ArrowRight } from "lucide-react";
@@ -24,6 +25,10 @@ const SecondPage = async ({
 
   const more = `/movie/${secondPage}/similar?language=en-US&page=1`;
   const moreMovies = await fetchData(more);
+
+  const trailer = `/movie/${secondPage}/videos?language=en-US`;
+  const comeTrailer = await fetchData(trailer);
+  console.log(comeTrailer);
 
   return (
     <div className="">
@@ -58,17 +63,49 @@ const SecondPage = async ({
           </div>
         </div>
 
-        <div>
-          <div className="mt-6">
+        <div className="flex mt-6 gap-8">
+          <div className="">
             <Image
               src={ConImg + "w500/" + movie.poster_path}
               alt=""
               width={290}
               height={428}
-              className="rounded-sm"
+              className="rounded-sm h-[428px]"
             />
           </div>
-          <div></div>
+          <div className="relative ">
+            <Image
+              src={ConImg + "original/" + movie.backdrop_path}
+              alt=""
+              width={760}
+              height={428}
+              className=" h-[428px] rounded-sm"
+            />
+            <div className="bg-[#000]/40 absolute top-0 w-[759px] h-[428px] rounded-sm"></div>
+            <Dialog>
+              <div className="flex items-center gap-3 absolute bottom-6 left-6">
+                <DialogTrigger>
+                  <button className="w-10 h-10 rounded-full flex items-center justify-center bg-[#fff]  ">
+                    <Image src="/play.svg" alt="" width={16} height={16} />
+                  </button>
+                </DialogTrigger>
+                <h4 className="text-[#fff] text-[16px] font-[400] leading-[24px] ">
+                  Play Trailer
+                </h4>
+                <h4>{}</h4>
+              </div>
+              <DialogContent className=" border-none p-0 m-0 bg-none left-[35.8%]">
+                <iframe
+                  src={`https://www.youtube.com/embed/${comeTrailer.results[0].key}`}
+                  width={997}
+                  height={561}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  title={comeTrailer.results[0].name}
+                  allowFullScreen
+                ></iframe>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
         <div className="flex gap-[10px] mt-8">
           {movie.genres.map((genre: Genre) => {
@@ -86,7 +123,7 @@ const SecondPage = async ({
         <div className="flex gap-[53px] border-b border-border mt-5 pb-1">
           <h4 className="w-[64px] text-[16px] font-[700] leading-[28px] ">
             {" "}
-            {directors.crew[1].job}{" "}
+            Director
           </h4>
           <h4 className="text-[16px] font-[400] leading-[24px] ">
             {" "}

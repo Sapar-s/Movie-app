@@ -10,12 +10,6 @@ export const Upcoming = async () => {
 
   const upcomingMovies = await fetchData(upcoming);
 
-  // console.log(upcomingMovies);
-
-  // const genres = "/genre/movie/list?language=en";
-
-  // const results = await fetchData(genres);
-
   return (
     <div className=" max-w-[1277px] w-full m-auto mt-[52px]">
       <div className="flex justify-between w-full  ">
