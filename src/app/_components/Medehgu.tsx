@@ -1,17 +1,6 @@
-// import { BaseURL, TOKEN } from "@/utils/constants";
+// export default async function Tur (){
+//   const hero = "/movie/now_playing?language=en-US&page=1";
 
-// export async function fetchData(endpoint: string) {
-//   const response = await fetch(
-//     BaseURL + endpoint,
+//   const heroMovies = await fetchData(hero);
 
-//     {
-//       headers: {
-//         Authorization: `Bearer ${TOKEN}`,
-//         "Content-Type": "application/json",
-//       },
-//     }
-//   );
-//   const data = await response.json();
-//   // console.log(BaseURL);
-//   return data;
 // }

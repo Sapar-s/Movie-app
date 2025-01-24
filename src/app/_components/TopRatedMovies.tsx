@@ -26,7 +26,7 @@ export const TopRated = async () => {
           .slice(0, 10)
           .map((movie: MovieType, index: number) => {
             return (
-              <Link href={`/movieInfo/${movie.original_title}`}>
+              <Link href={`/movieInfo/${movie.id}`}>
                 <div key={index} className="rounded-lg overflow-hidden">
                   <div>
                     <Image
@@ -37,7 +37,7 @@ export const TopRated = async () => {
                       height={500}
                     />
                   </div>{" "}
-                  <div className="p-2 flex flex-col items-start w-[230px] bg-[#F4F4F5] h-[95px]">
+                  <div className="p-2 flex flex-col items-start w-[230px] bg-secondary h-[95px]">
                     <h3 className="text-[14px] flex gap-1 mt-1 ">
                       <img src="/star.svg" alt="" />
                       {movie?.vote_average}/10
