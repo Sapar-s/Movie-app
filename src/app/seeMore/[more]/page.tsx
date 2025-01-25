@@ -1,33 +1,22 @@
+import { Footer } from "@/app/_components/Footer";
+import { Header } from "@/app/_components/Header";
 import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
-import { fetchData } from "./Genre";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export const Upcoming = async () => {
-  const upcoming = "/movie/upcoming?language=en-US&page=1";
-
-  const upcomingMovies = await fetchData(upcoming);
-
-  console.log(upcomingMovies);
-
+export default function MoreMovie({
+  params: { more },
+}: {
+  params: { more: object };
+}) {
+  console.log(more);
   return (
-    <div className=" max-w-[1277px] w-full m-auto mt-[52px]">
-      <div className="flex justify-between w-full  ">
-        <h2 className="text-[24px] text-[#09090B] font-[600] leading-8 ">
-          Upcoming
-        </h2>
-        <Link href={`/seeMore/${upcomingMovies.results}`}>
-          <button className="flex text-[14px] items-center gap-2 ">
-            See more <ArrowRight className="w-4 h-4 " />
-          </button>
-        </Link>
-      </div>
-      <div className="  flex flex-wrap gap-[31px]  justify-center mt-9 ">
-        {upcomingMovies.results
-          .slice(0, 10)
-          .map((movie: MovieType, index: number) => {
+    <>
+      <Header />
+      <div>
+        <div className="  flex flex-wrap gap-[31px]  justify-center mt-9 ">
+          {more.map((movie: MovieType, index: number) => {
             return (
               <Link href={`/movieInfo/${movie.id}`} key={index}>
                 <div className="rounded-lg overflow-hidden">
@@ -51,7 +40,9 @@ export const Upcoming = async () => {
               </Link>
             );
           })}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
-};
+}
