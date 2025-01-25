@@ -108,9 +108,12 @@ const SecondPage = async ({
           </div>
         </div>
         <div className="flex gap-[10px] mt-8">
-          {movie.genres.map((genre: Genre) => {
+          {movie.genres.map((genre: Genre, index: number) => {
             return (
-              <div className="py-[2px] px-[10px] border-[1px] border-[#E4E4E7] rounded-full border-border text-[12px] font-[600] leading-[16px] ">
+              <div
+                key={index}
+                className="py-[2px] px-[10px] border-[1px] border-[#E4E4E7] rounded-full border-border text-[12px] font-[600] leading-[16px] "
+              >
                 {genre.name}
               </div>
             );
@@ -150,7 +153,6 @@ const SecondPage = async ({
           </h4>
           <h4 className="text-[16px] font-[400] leading-[24px]  ">
             {" "}
-            {/* {.slice(0, 5).map((star) => star.name)} */}
             {directors.cast[0].name} · {directors.cast[1].name} ·{" "}
             {directors.cast[2].name} · {directors.cast[3].name} ·{" "}
             {directors.cast[4].name}
@@ -171,12 +173,9 @@ const SecondPage = async ({
               .slice(1, 6)
               .map((movie: MovieType, index: number) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <Link href={`/movieInfo/${movie.id}`}>
-                      <div
-                        key={index}
-                        className="rounded-[8px] overflow-hidden "
-                      >
+                      <div className="rounded-[8px] overflow-hidden ">
                         <div>
                           <Image
                             src={ConImg + "w500/" + movie?.poster_path}
