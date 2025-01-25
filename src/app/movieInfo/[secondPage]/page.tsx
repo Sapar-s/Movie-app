@@ -11,7 +11,7 @@ import Link from "next/link";
 const SecondPage = async ({
   params: { secondPage },
 }: {
-  params: { secondPage: string | number };
+  params: { secondPage: number };
 }) => {
   const movieDetail = `/movie/${secondPage}?language=en-US`;
   const movie = await fetchData(movieDetail);
