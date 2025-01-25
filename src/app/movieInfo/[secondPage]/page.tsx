@@ -31,7 +31,7 @@ const SecondPage = async ({
   console.log(comeTrailer);
 
   return (
-    <div className="">
+    <div>
       <Header />
       <div className="max-w-[1080px] m-auto">
         <div className="flex justify-between mt-[52px]">

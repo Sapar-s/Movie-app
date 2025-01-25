@@ -25,8 +25,8 @@ export const Upcoming = async () => {
           .slice(0, 10)
           .map((movie: MovieType, index: number) => {
             return (
-              <Link href={`/movieInfo/${movie.id}`}>
-                <div key={index} className="rounded-lg overflow-hidden">
+              <Link href={`/movieInfo/${movie.id}`} key={index}>
+                <div className="rounded-lg overflow-hidden">
                   <div>
                     <Image
                       src={ConImg + "w500/" + movie?.poster_path}
