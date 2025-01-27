@@ -10,7 +10,7 @@ export const Upcoming = async () => {
 
   const upcomingMovies = await fetchData(upcoming);
 
-  console.log(upcomingMovies);
+  // console.log(upcomingMovies);
 
   return (
     <div className=" max-w-[1277px] w-full m-auto mt-[52px]">
@@ -18,7 +18,7 @@ export const Upcoming = async () => {
         <h2 className="text-[24px] text-[#09090B] font-[600] leading-8 ">
           Upcoming
         </h2>
-        <Link href={`/seeMore/${upcomingMovies.results}`}>
+        <Link href="/seeMore/upcoming">
           <button className="flex text-[14px] items-center gap-2 ">
             See more <ArrowRight className="w-4 h-4 " />
           </button>

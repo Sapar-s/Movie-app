@@ -1,18 +1,22 @@
-import { Footer } from "@/app/_components/Footer";
 import { fetchData } from "@/app/_components/Genre";
-import { Header } from "@/app/_components/Header";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { ConImg } from "@/utils/constants";
 import { Genre, MovieType } from "@/utils/types";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const SecondPage = async ({
-  params: { secondPage },
-}: {
-  params: { secondPage: number };
+const SecondPage = async (props: {
+  params: Promise<{ secondPage: string }>;
 }) => {
+  const { secondPage } = await props.params;
+
   const movieDetail = `/movie/${secondPage}?language=en-US`;
   const movie = await fetchData(movieDetail);
   // console.log(movie);
@@ -28,11 +32,10 @@ const SecondPage = async ({
 
   const trailer = `/movie/${secondPage}/videos?language=en-US`;
   const comeTrailer = await fetchData(trailer);
-  console.log(comeTrailer);
+  // console.log(comeTrailer);
 
   return (
     <div>
-      <Header />
       <div className="max-w-[1080px] m-auto">
         <div className="flex justify-between mt-[52px]">
           <div>
@@ -84,7 +87,7 @@ const SecondPage = async ({
             <div className="bg-[#000]/40 absolute top-0 w-[759px] h-[428px] rounded-sm"></div>
             <Dialog>
               <div className="flex items-center gap-3 absolute bottom-6 left-6">
-                <DialogTrigger>
+                <DialogTrigger asChild>
                   <button className="w-10 h-10 rounded-full flex items-center justify-center bg-[#fff]  ">
                     <Image src="/play.svg" alt="" width={16} height={16} />
                   </button>
@@ -94,7 +97,7 @@ const SecondPage = async ({
                 </h4>
                 <h4>{}</h4>
               </div>
-              <DialogContent className=" border-none p-0 m-0 bg-none left-[35.8%]">
+              <DialogContent className=" border-none p-0 m-0 bg-none w-[997px] max-w-full">
                 <iframe
                   src={`https://www.youtube.com/embed/${comeTrailer.results[0].key}`}
                   width={997}
@@ -103,6 +106,7 @@ const SecondPage = async ({
                   title={comeTrailer.results[0].name}
                   allowFullScreen
                 ></iframe>
+                <DialogTitle className="hidden"></DialogTitle>
               </DialogContent>
             </Dialog>
           </div>
@@ -202,7 +206,6 @@ const SecondPage = async ({
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

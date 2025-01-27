@@ -16,9 +16,11 @@ export const TopRated = async () => {
         <h2 className="text-[24px] text-[#09090B] font-[600] leading-8 ">
           Top Rated
         </h2>
-        <button className="flex text-[14px] items-center gap-2">
-          See more <ArrowRight className="w-4 h-4 " />
-        </button>
+        <Link href="/seeMore/top_rated">
+          <button className="flex text-[14px] items-center gap-2">
+            See more <ArrowRight className="w-4 h-4 " />
+          </button>{" "}
+        </Link>
       </div>
 
       <div className="  flex flex-wrap gap-[31px] justify-center mt-9 ">

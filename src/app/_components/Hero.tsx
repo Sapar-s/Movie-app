@@ -14,7 +14,12 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export const Hero = async () => {
   const hero = "/movie/now_playing?language=en-US&page=1";
@@ -43,7 +48,7 @@ export const Hero = async () => {
               .slice(0, 10)
               .map((movie: MovieType, index: number) => {
                 return (
-                  <CarouselItem key={index}>
+                  <CarouselItem key={index} className="relative">
                     <Link href={`/movieInfo/${movie.id}`}>
                       <div
                         className="w-[100vw] h-[600px] relative "
@@ -74,38 +79,39 @@ export const Hero = async () => {
                               </span>
                             </h3>
                           </div>
-                          <div className="text-[12px] leading-[16px] text-[#fafafa] w-[302px] mt-[16px] ">
+                          <div className="text-[16px] leading-[16px] text-[#fafafa] w-[310px] mt-[16px] ">
                             {movie?.overview}
                           </div>
-                          <Dialog>
-                            <DialogTrigger>
-                              <Button
-                                variant="outline"
-                                className="py-2 px-4  rounded-md flex gap-2 h-10 mt-4 bg-secondary  items-center "
-                              >
-                                <Image
-                                  src="/play.svg"
-                                  alt=""
-                                  height={16}
-                                  width={16}
-                                />
-                                Watch Trailer
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className=" border-none p-0 m-0 bg-none left-[35.8%]">
-                              <iframe
-                                src={`https://www.youtube.com/embed/${comeTrailer.results[0].key}`}
-                                width={997}
-                                height={561}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                title={comeTrailer.results[0].name}
-                                allowFullScreen
-                              ></iframe>
-                            </DialogContent>
-                          </Dialog>
                         </div>
                       </div>
                     </Link>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="py-2 px-4  rounded-md flex gap-2 h-10 mt-4 bg-secondary  items-center absolute top-[402px] left-[156px] "
+                        >
+                          <Image
+                            src="/play.svg"
+                            alt=""
+                            height={16}
+                            width={16}
+                          />
+                          Watch Trailer
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className=" border-none p-0 m-0 bg-none w-[997px] max-w-full">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${comeTrailer.results[0].key}`}
+                          width={997}
+                          height={561}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          title={comeTrailer.results[0].name}
+                          allowFullScreen
+                        ></iframe>
+                        <DialogTitle className="hidden"></DialogTitle>
+                      </DialogContent>
+                    </Dialog>
                   </CarouselItem>
                 );
               })}
