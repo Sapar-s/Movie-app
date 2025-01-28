@@ -15,6 +15,7 @@ export const Header = async () => {
   const genres = "/genre/movie/list?language=en";
 
   const results = await fetchData(genres);
+  // console.log(results);
 
   return (
     <div className="w-[100vw] sticky top-0 z-20 bg-background">
@@ -33,7 +34,7 @@ export const Header = async () => {
                 Genre
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[577px] p-[20px]">
+            <PopoverContent className="w-[577px] p-[20px] mr-[-480px] ">
               <h3 className="text-[24px] font-[600] leading-[32px] ">Genres</h3>
               <h4 className="text-[16px] font-[400] leading-[24px] mt-1 border-b-[1px] pb-4 border-border ">
                 See lists of movies by genre
@@ -41,14 +42,16 @@ export const Header = async () => {
               <div className="flex flex-wrap gap-4 mt-4 ">
                 {results.genres.map((genre: Genre, index: number) => {
                   return (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      className="py-[2px] pl-[10px] pr-1 h-[22px] rounded-full "
-                    >
-                      {genre.name}
-                      <img src="/rightArrow.svg" alt="" />
-                    </Button>
+                    <Link href={`/genres/${genre.id}`}>
+                      <Button
+                        key={index}
+                        variant="outline"
+                        className="py-[2px] pl-[10px] pr-1 h-[22px] rounded-full "
+                      >
+                        {genre.name}
+                        <img src="/rightArrow.svg" alt="" />
+                      </Button>
+                    </Link>
                   );
                 })}
               </div>

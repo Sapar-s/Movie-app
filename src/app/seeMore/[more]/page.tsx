@@ -13,13 +13,15 @@ import { MovieType } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function MoreMovie({
-  params: { more },
-}: {
-  params: { more: string };
+export default async function MoreMovie(props: {
+  params: Promise<{ more: string }>;
 }) {
   // console.log(more);
+  const { more } = await props.params;
 
+  // const pages = () => {
+  //   return "1";
+  // };
   const getMovies = `/movie/${more}?language=en-US&page=1`;
   const moreMovies = await fetchData(getMovies);
   // console.log(moreMovies);

@@ -168,9 +168,11 @@ const SecondPage = async (props: {
             <h3 className="text-[24px] font-[600] leading-[32px] ">
               More like this
             </h3>
-            <button className="flex text-[14px] items-center gap-2">
-              See more <ArrowRight className="w-4 h-4 " />
-            </button>
+            <Link href={`/moreLike/${secondPage}`}>
+              <button className="flex text-[14px] items-center gap-2">
+                See more <ArrowRight className="w-4 h-4 " />
+              </button>
+            </Link>
           </div>
           <div className="mt-9 flex gap-8 ">
             {moreMovies.results
