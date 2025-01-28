@@ -32,7 +32,7 @@ export default async function (props: {
           <div className="flex flex-wrap gap-4 mt-4 ">
             {results.genres.map((genre: Genre, index: number) => {
               return (
-                <Link href={`/genres/${genre.id}`}>
+                <Link key={index} href={`/genres/${genre.id}`}>
                   <Button
                     key={index}
                     variant="outline"
