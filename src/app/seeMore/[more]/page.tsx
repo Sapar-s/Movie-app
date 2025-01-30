@@ -16,7 +16,6 @@ import Link from "next/link";
 export default async function MoreMovie(props: {
   params: Promise<{ more: string }>;
 }) {
-  // console.log(more);
   const { more } = await props.params;
 
   // const pages = () => {
@@ -24,7 +23,6 @@ export default async function MoreMovie(props: {
   // };
   const getMovies = `/movie/${more}?language=en-US&page=1`;
   const moreMovies = await fetchData(getMovies);
-  // console.log(moreMovies);
 
   return (
     <>

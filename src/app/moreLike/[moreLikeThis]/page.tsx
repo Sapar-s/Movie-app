@@ -24,7 +24,7 @@ export default async function MoreMovie(props: {
   // };
   const getMovies = `/movie/${moreLikeThis}/similar?language=en-US&page=1`;
   const moreMovies = await fetchData(getMovies);
-  console.log(moreMovies);
+  //   console.log(moreMovies);
 
   return (
     <div className="w-[100vw] flex flex-col items-center ">

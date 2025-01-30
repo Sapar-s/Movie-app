@@ -19,7 +19,6 @@ const SecondPage = async (props: {
 
   const movieDetail = `/movie/${secondPage}?language=en-US`;
   const movie = await fetchData(movieDetail);
-  // console.log(movie);
 
   const minut = movie.runtime % 60;
   const hour = Math.floor(movie.runtime / 60);
@@ -27,12 +26,27 @@ const SecondPage = async (props: {
   const director = `/movie/${secondPage}/credits?language=en-US`;
   const directors = await fetchData(director);
 
+  const writers = job();
+
+  function job() {
+    const workers = directors.crew.map(
+      (worker: { name: string; job: string }, index: number) => {
+        if (worker.job == "Writer") {
+          return <div key={index}>{worker.name} </div>;
+        }
+      }
+    );
+    return workers;
+  }
+  console.log("workers ==> ", writers);
+
+  console.log("directors => ", directors);
+
   const more = `/movie/${secondPage}/similar?language=en-US&page=1`;
   const moreMovies = await fetchData(more);
 
   const trailer = `/movie/${secondPage}/videos?language=en-US`;
   const comeTrailer = await fetchData(trailer);
-  // console.log(comeTrailer);
 
   return (
     <div>
@@ -99,11 +113,11 @@ const SecondPage = async (props: {
               </div>
               <DialogContent className=" border-none p-0 m-0 bg-none w-[997px] max-w-full">
                 <iframe
-                  src={`https://www.youtube.com/embed/${comeTrailer.results[0].key}`}
+                  src={`https://www.youtube.com/embed/${comeTrailer.results[0]?.key}`}
                   width={997}
                   height={561}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  title={comeTrailer.results[0].name}
+                  title={comeTrailer.results[0]?.name}
                   allowFullScreen
                 ></iframe>
                 <DialogTitle className="hidden"></DialogTitle>
@@ -118,7 +132,7 @@ const SecondPage = async (props: {
                 key={index}
                 className="py-[2px] px-[10px] border-[1px] border-[#E4E4E7] rounded-full border-border text-[12px] font-[600] leading-[16px] "
               >
-                {genre.name}
+                {genre?.name}
               </div>
             );
           })}
@@ -134,7 +148,7 @@ const SecondPage = async (props: {
           </h4>
           <h4 className="text-[16px] font-[400] leading-[24px] ">
             {" "}
-            {directors.crew[1].name}
+            {directors.crew[1]?.name}
           </h4>
         </div>
 
@@ -143,11 +157,9 @@ const SecondPage = async (props: {
             {" "}
             Writers{" "}
           </h4>
-          <h4 className="text-[16px] font-[400] leading-[24px] ">
-            {" "}
-            {directors.crew[10].name} · {directors.crew[11].name} ·{" "}
-            {directors.crew[12].name}
-          </h4>
+          <div className=" flex gap-3 text-[16px] font-[400] leading-[24px] ">
+            {writers}
+          </div>
         </div>
 
         <div className="flex gap-[53px] border-b border-border mt-5 pb-1">
@@ -157,9 +169,9 @@ const SecondPage = async (props: {
           </h4>
           <h4 className="text-[16px] font-[400] leading-[24px]  ">
             {" "}
-            {directors.cast[0].name} · {directors.cast[1].name} ·{" "}
-            {directors.cast[2].name} · {directors.cast[3].name} ·{" "}
-            {directors.cast[4].name}
+            {directors.cast[0]?.name} · {directors.cast[1]?.name} ·{" "}
+            {directors.cast[2]?.name} · {directors.cast[3]?.name} ·{" "}
+            {directors.cast[4]?.name}
           </h4>
         </div>
 

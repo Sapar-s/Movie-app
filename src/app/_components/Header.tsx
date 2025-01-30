@@ -38,7 +38,6 @@ export const Header = async () => {
               </h4>
               <div className="flex flex-wrap gap-4 mt-4 ">
                 {genres.map((genre: Genre, index: number) => {
-                  // console.log("genre ni ", genre);
                   return (
                     <Link key={index} href={`/genres/${genre.id}`}>
                       <Button
