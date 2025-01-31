@@ -1,13 +1,5 @@
 import { fetchData } from "@/app/_components/Genre";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { MoviePagination } from "@/app/_components/MoviePagination";
 import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
 import Image from "next/image";
@@ -16,15 +8,11 @@ import Link from "next/link";
 export default async function MoreMovie(props: {
   params: Promise<{ moreLikeThis: string }>;
 }) {
-  // console.log(more);
   const { moreLikeThis } = await props.params;
-
-  // const pages = () => {
-  //   return "1";
-  // };
-  const getMovies = `/movie/${moreLikeThis}/similar?language=en-US&page=1`;
-  const moreMovies = await fetchData(getMovies);
-  //   console.log(moreMovies);
+  const moreMovies = await fetchData(
+    `/movie/${moreLikeThis}/similar?language=en-US&page=1`
+  );
+  console.log(moreMovies);
 
   return (
     <div className="w-[100vw] flex flex-col items-center ">
@@ -62,33 +50,9 @@ export default async function MoreMovie(props: {
               </div>
             );
           })}
+          <MoviePagination pages={moreMovies.total_pages} />
         </div>
       </div>
-
-      <Pagination className="w-[100vw] flex justify-end mt-8">
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" isActive>
-              1
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">2</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
     </div>
   );
 }

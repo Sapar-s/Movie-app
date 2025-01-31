@@ -20,7 +20,7 @@ export default function Search() {
     const searchData = await fetchData(
       `/search/movie?query=${e.target.value}&language=en-US&page=1`
     );
-    console.log({ searchData });
+    // console.log({ searchData });
     setSearched(searchData.results);
   };
   const clearInput = () => {
@@ -83,7 +83,7 @@ export default function Search() {
             </Link>
           ))}
           <div className="h-[40px] py-2 px-4 flex items-end ">
-            <Link href={`/search/${searchValue}`}>
+            <Link href={`/search?value=${searchValue}`}>
               <button
                 onClick={clearInput}
                 className="text-[14px] leading-[20px] font-[500] "

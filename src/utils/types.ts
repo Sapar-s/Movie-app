@@ -19,3 +19,10 @@ export type Genre = {
   id: number;
   name: string;
 };
+
+export type SearchMovie = {
+  page: number;
+  results: [];
+  total_pages: number;
+  total_results: number;
+};
