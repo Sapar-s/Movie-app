@@ -33,7 +33,7 @@ export default function Search() {
       );
       console.log("getsearchedd", getSearched);
       setGetSearched(getSearched);
-      const getGenres = `/discover/movie?language=en&with_genres=${value}&page=1`;
+      // const getGenres = `/discover/movie?language=en&with_genres=${value}&page=1`;
 
       // const selectGenres = await fetchData(getGenres);
 
