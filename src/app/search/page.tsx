@@ -31,7 +31,7 @@ export default function Search() {
       const getSearched = await fetchData(
         `/search/movie?query=${value}&language=en-US&page=1`
       );
-      console.log("getsearchedd", getSearched);
+      // console.log("getsearchedd", getSearched);
       setGetSearched(getSearched);
       // const getGenres = `/discover/movie?language=en&with_genres=${value}&page=1`;
 
@@ -54,7 +54,7 @@ export default function Search() {
             Search results
           </h2>
           <h4 className=" flex gap-2 text-[20px] font-[600] leading-[28px] mt-8 ">
-            {getSearched?.total_results} results for &#34; {value} &#34;
+            {getSearched?.total_results} results for &#34;{value}&#34;
           </h4>
           <div className="max-w-[806px] w-full flex justify-center flex-wrap gap-[48px]   mt-9 ">
             {getSearched?.results?.map((movie: MovieType, index: number) => {

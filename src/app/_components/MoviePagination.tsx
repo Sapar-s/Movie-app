@@ -12,9 +12,11 @@ import {
 
 export const MoviePagination = ({ pages }: { pages: number }) => {
   return (
-    <>
-      <div>{pages}</div>
-      <Pagination className="w-[100vw] flex justify-end mt-8">
+    <div
+    // className="w-[100vw] flex justify-end mt-8 "
+    >
+      {/* <div>{pages}</div> */}
+      <Pagination className="">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious href="#" />
@@ -38,6 +40,6 @@ export const MoviePagination = ({ pages }: { pages: number }) => {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-    </>
+    </div>
   );
 };

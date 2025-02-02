@@ -38,9 +38,9 @@ const SecondPage = async (props: {
     );
     return workers;
   }
-  console.log("workers ==> ", writers);
+  // console.log("workers ==> ", writers);
 
-  console.log("directors => ", directors);
+  // console.log("directors => ", directors);
 
   const more = `/movie/${secondPage}/similar?language=en-US&page=1`;
   const moreMovies = await fetchData(more);
@@ -57,7 +57,7 @@ const SecondPage = async (props: {
               {movie.original_title}
             </h1>
             <h3 className="text-[18px] leading-[28px] font-[400] ">
-              {movie.release_date} · {movie.adult ? "PG" : "R"} · {hour}h{" "}
+              {movie.release_date} · {movie.adult ? "R" : "PG"} · {hour}h{" "}
               {minut}m
             </h3>
           </div>
