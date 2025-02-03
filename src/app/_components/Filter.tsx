@@ -8,7 +8,7 @@ import { fetchData } from "./FetchData";
 import { useSearchParams } from "next/navigation";
 
 export const Filter = () => {
-  const [genres, setGenres] = useState<any>(null);
+  const [genres, setGenres] = useState<[] | null>(null);
   // const [selectGenres, setSelectGenres] = useState<any>(null);
   // const [selectedGenre, setSelectedGenre] = useState<any>(null);
   const searchParams = useSearchParams();
@@ -16,7 +16,7 @@ export const Filter = () => {
 
   useEffect(() => {
     const getDatas = async () => {
-      const getGenres = `/discover/movie?language=en&with_genres=${genreIds}&page=1`;
+      //   const getGenres = `/discover/movie?language=en&with_genres=${genreIds}&page=1`;
       //   const selectGenres = await fetchData(getGenres);
       const { genres } = await fetchData("/genre/movie/list?language=en");
       //   const selectedGenre = genres.find(

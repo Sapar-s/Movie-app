@@ -2,7 +2,7 @@
 
 import { fetchData } from "@/app/_components/FetchData";
 import { ConImg } from "@/utils/constants";
-import { MovieType } from "@/utils/types";
+import { Genre, MovieType, SearchMovie } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import { Filter } from "../_components/Filter";
 
 export default function Page() {
-  const [selectGenres, setSelectGenres] = useState<any>(null);
-  const [selectedGenre, setSelectedGenre] = useState<any>(null);
+  const [selectGenres, setSelectGenres] = useState<SearchMovie | null>(null);
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   const searchParams = useSearchParams();
   const genreIds = searchParams.get("genreIds");
 
