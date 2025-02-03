@@ -5,14 +5,14 @@ import { Genre } from "@/utils/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fetchData } from "./FetchData";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 
 export const Filter = () => {
   const [genres, setGenres] = useState<[] | null>(null);
   // const [selectGenres, setSelectGenres] = useState<any>(null);
   // const [selectedGenre, setSelectedGenre] = useState<any>(null);
-  const searchParams = useSearchParams();
-  const genreIds = searchParams.get("genreIds");
+  //   const searchParams = useSearchParams();
+  //   const genreIds = searchParams.get("genreIds");
 
   useEffect(() => {
     const getDatas = async () => {
