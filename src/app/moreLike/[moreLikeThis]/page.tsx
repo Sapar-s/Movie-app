@@ -51,7 +51,10 @@ export default async function MoreMovie(props: {
             );
           })}
           <div className="max-w-[1277px] w-full flex justify-end ">
-            <MoviePagination pages={moreMovies.total_pages} />
+            <MoviePagination
+              totalPages={moreMovies.total_pages}
+              currentPage={moreMovies.page}
+            />
           </div>
         </div>
       </div>

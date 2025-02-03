@@ -1,3 +1,5 @@
+"use client";
+
 import { ConImg } from "@/utils/constants";
 import { fetchData } from "./FetchData";
 import { MovieType } from "@/utils/types";
@@ -9,10 +11,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-// import Autoplay from "embla-carousel-autoplay";
+import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   Dialog,
@@ -21,29 +23,40 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export const Hero = async () => {
-  const hero = "/movie/now_playing?language=en-US&page=1";
-  const heroMovies = await fetchData(hero);
+export const Hero = () => {
+  const [heroMovies, setHeroMovies] = useState<any>(null);
+  const [comeTrailer, setComeTrailer] = useState<any>(null);
 
-  const trailer = `/movie/${heroMovies.results.map(
-    (movie: MovieType) => movie.id
-  )}/videos?language=en-US`;
-  const comeTrailer = await fetchData(trailer);
-  // const plugin = React.useRef(
-  //   Autoplay({ delay: 2000, stopOnInteraction: true })
-  // );
+  useEffect(() => {
+    const getDatas = async () => {
+      const hero = "/movie/now_playing?language=en-US&page=1";
+      const heroMovies = await fetchData(hero);
+
+      const trailer = `/movie/${heroMovies.results.map(
+        (movie: MovieType) => movie.id
+      )}/videos?language=en-US`;
+      const comeTrailer = await fetchData(trailer);
+      setHeroMovies(heroMovies);
+      setComeTrailer(comeTrailer);
+    };
+    getDatas();
+  }, []);
+
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
 
   return (
     <>
       <div className="  flex flex-wrap gap-6 justify-center mt-6 ">
         <Carousel
-          // plugins={[plugin.current]}
+          plugins={[plugin.current]}
           className="w-full h-[600px]"
-          // onMouseEnter={plugin.current.stop}
-          // onMouseLeave={plugin.current.reset}
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
         >
           <CarouselContent>
-            {heroMovies.results
+            {heroMovies?.results
 
               .slice(0, 10)
               .map((movie: MovieType, index: number) => {

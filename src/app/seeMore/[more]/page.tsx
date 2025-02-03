@@ -24,6 +24,7 @@ export default async function MoreMovie(props: {
   // };
   const getMovies = `/movie/${more}?language=en-US&page=1`;
   const moreMovies = await fetchData(getMovies);
+  // console.log(moreMovies);
 
   return (
     <div className="w-[100vw] flex justify-center ">
@@ -57,7 +58,10 @@ export default async function MoreMovie(props: {
             );
           })}
           <div className="max-w-[1277px] w-full flex justify-end ">
-            <MoviePagination pages={moreMovies.total_pages} />
+            <MoviePagination
+              totalPages={moreMovies.total_pages}
+              currentPage={moreMovies.page}
+            />
           </div>
         </div>
       </div>
