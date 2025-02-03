@@ -2,7 +2,7 @@
 
 import { ConImg } from "@/utils/constants";
 import { fetchData } from "./FetchData";
-import { MovieType } from "@/utils/types";
+import { MovieType, SearchMovie, TrailerType } from "@/utils/types";
 
 import {
   Carousel,
@@ -24,8 +24,11 @@ import {
 } from "@/components/ui/dialog";
 
 export const Hero = () => {
-  const [heroMovies, setHeroMovies] = useState<any>(null);
-  const [comeTrailer, setComeTrailer] = useState<any>(null);
+  const [heroMovies, setHeroMovies] = useState<SearchMovie | null>(null);
+  const [comeTrailer, setComeTrailer] = useState<TrailerType | any | null>(
+    null
+  );
+  console.log(comeTrailer);
 
   useEffect(() => {
     const getDatas = async () => {
@@ -43,7 +46,7 @@ export const Hero = () => {
   }, []);
 
   const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 3000, stopOnInteraction: true })
   );
 
   return (
@@ -115,11 +118,11 @@ export const Hero = () => {
                       </DialogTrigger>
                       <DialogContent className=" border-none p-0 m-0 bg-none w-[997px] max-w-full">
                         <iframe
-                          src={`https://www.youtube.com/embed/${comeTrailer.results[0].key}`}
+                          src={`https://www.youtube.com/embed/${comeTrailer?.results[0]?.key}`}
                           width={997}
                           height={561}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          title={comeTrailer.results[0].name}
+                          title={comeTrailer?.results[0]?.name}
                           allowFullScreen
                         ></iframe>
                         <DialogTitle className="hidden"></DialogTitle>

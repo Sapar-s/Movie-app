@@ -26,3 +26,8 @@ export type SearchMovie = {
   total_pages: number;
   total_results: number;
 };
+
+export type TrailerType = {
+  id: number;
+  results: [];
+};
