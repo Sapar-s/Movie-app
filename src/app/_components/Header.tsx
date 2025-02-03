@@ -1,38 +1,9 @@
-"use client"
-
-import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { ModeToggle } from "@/components/ui/theme-toggle";
-import { fetchData } from "./Genre";
-import { Genre } from "@/utils/types";
 import Link from "next/link";
 import Search from "./Search";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { Genres } from "./Genres";
 
 export const Header = () => {
-const [genres, setGenres] = useState< [] | null>(null)
-const [open, setOpen] = useState(false)
-const router = useRouter()
-
-useEffect(()=>{
-  const getDatas = async ()=>{
-      const { genres } = await fetchData("/genre/movie/list?language=en");
-      setGenres(genres)
-  }
-  getDatas()
-},[])
-
-const handleClick = (genreId: number)=>{
-router.push(`/genres/${genreId}`)
-}
-
-
-
   return (
     <div className="w-[100vw] sticky top-0 z-20 bg-background">
       <div className="max-w-[1440px] h-[59px] px-4 flex items-center justify-between m-auto ">
@@ -43,38 +14,7 @@ router.push(`/genres/${genreId}`)
           </div>
         </Link>
         <div className="flex">
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button variant="outline" className="font-[500] leading-[20px] ">
-                <img src="/chevronDown.svg" alt="" />
-                Genre
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[577px] p-[20px] mr-[-480px] " onInteractOutside={() => setOpen(false)} onClick={() => setOpen(false)}>
-              <h3 className="text-[24px] font-[600] leading-[32px] ">Genres</h3>
-              <h4 className="text-[16px] font-[400] leading-[24px] mt-1 border-b-[1px] pb-4 border-border ">
-                See lists of movies by genre
-              </h4>
-              <div className="flex flex-wrap gap-4 mt-4 ">
-                {genres?.map((genre: Genre, index: number) => {
-                  return (
-                    // <Link key={index}  href={`/genres/${genre.id}`}>
-                      <Button
-                        key={index}
-                        onClick={()=> handleClick(genre.id)}
-                        variant="outline"
-                        className="py-[2px] pl-[10px] pr-1 h-[22px] rounded-full "
-                      >
-                        {genre?.name}
-                        <img src="/rightArrow.svg" alt="" />
-                      </Button>
-                    // </Link>
-                  );
-                })}
-              </div>
-            </PopoverContent>
-          </Popover>
-
+          <Genres />
           <Search />
         </div>
         <ModeToggle />

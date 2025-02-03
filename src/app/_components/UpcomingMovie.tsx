@@ -1,6 +1,6 @@
 import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
-import { fetchData } from "./Genre";
+import { fetchData } from "./FetchData";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

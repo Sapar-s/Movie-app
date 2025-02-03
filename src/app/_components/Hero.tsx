@@ -1,5 +1,5 @@
 import { ConImg } from "@/utils/constants";
-import { fetchData } from "./Genre";
+import { fetchData } from "./FetchData";
 import { MovieType } from "@/utils/types";
 
 import {

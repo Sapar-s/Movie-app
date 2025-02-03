@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { fetchData } from "./Genre";
+import { fetchData } from "./FetchData";
 import Image from "next/image";
 import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";

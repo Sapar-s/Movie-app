@@ -1,4 +1,4 @@
-import { fetchData } from "@/app/_components/Genre";
+import { fetchData } from "@/app/_components/FetchData";
 
 import {
   Dialog,

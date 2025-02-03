@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchData } from "@/app/_components/Genre";
+import { fetchData } from "@/app/_components/FetchData";
 import { Button } from "@/components/ui/button";
 import {
   Pagination,
