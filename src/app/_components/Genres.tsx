@@ -10,7 +10,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Genre } from "@/utils/types";
 import { Badge } from "@/components/ui/badge";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  //  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
 export const Genres = () => {
   const [genres, setGenres] = useState<[] | null>(null);

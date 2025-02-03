@@ -15,7 +15,7 @@ export const MoviePagination = ({ pages }: { pages: number }) => {
     <div
     // className="w-[100vw] flex justify-end mt-8 "
     >
-      {/* <div>{pages}</div> */}
+      <div>{pages}</div>
       <Pagination className="">
         <PaginationContent>
           <PaginationItem>

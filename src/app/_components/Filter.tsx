@@ -17,11 +17,11 @@ export const Filter = () => {
   useEffect(() => {
     const getDatas = async () => {
       const getGenres = `/discover/movie?language=en&with_genres=${genreIds}&page=1`;
-      const selectGenres = await fetchData(getGenres);
+      //   const selectGenres = await fetchData(getGenres);
       const { genres } = await fetchData("/genre/movie/list?language=en");
-      const selectedGenre = genres.find(
-        (genre: { id: string; name: string }) => genre.id == genreIds
-      );
+      //   const selectedGenre = genres.find(
+      //     (genre: { id: string; name: string }) => genre.id == genreIds
+      //   );
       setGenres(genres);
       //   setSelectGenres(selectGenres);
       //   setSelectedGenre(selectedGenre);
