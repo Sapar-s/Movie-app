@@ -3,7 +3,7 @@
 import { fetchData } from "@/app/_components/FetchData";
 import { MoviePagination } from "@/app/_components/MoviePagination";
 import { ConImg } from "@/utils/constants";
-import { MovieType } from "@/utils/types";
+import { MovieType, SearchMovie } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -12,10 +12,9 @@ import { useEffect, useState } from "react";
 export default function MoreMovie(props: {
   params: Promise<{ moreLikeThis: string }>;
 }) {
-  const [moreMovies, setMoreMovies] = useState<any>(null);
+  const [moreMovies, setMoreMovies] = useState<SearchMovie | null>(null);
   const searchParams = useSearchParams();
   const pages = searchParams.get("page");
-  console.log({ moreMovies });
 
   useEffect(() => {
     const getDatas = async () => {
@@ -68,8 +67,8 @@ export default function MoreMovie(props: {
           })}
           <div className="max-w-[1277px] w-full flex justify-end ">
             <MoviePagination
-              totalPages={moreMovies?.total_pages}
-              currentPage={moreMovies?.page}
+              totalPages={moreMovies?.total_pages || 10}
+              currentPage={moreMovies?.page || 1}
             />
           </div>
         </div>

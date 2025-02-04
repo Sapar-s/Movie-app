@@ -20,7 +20,7 @@ export default function Search() {
     const searchData = await fetchData(
       `/search/movie?query=${e.target.value}&language=en-US&page=1`
     );
-    // console.log({ searchData });
+
     setSearched(searchData.results);
   };
   const clearInput = () => {

@@ -25,9 +25,7 @@ import {
 
 export const Hero = () => {
   const [heroMovies, setHeroMovies] = useState<SearchMovie | null>(null);
-  const [comeTrailer, setComeTrailer] = useState<TrailerType | any | null>(
-    null
-  );
+  const [comeTrailer, setComeTrailer] = useState<TrailerType | null>(null);
 
   useEffect(() => {
     const getDatas = async () => {

@@ -29,7 +29,7 @@ export type SearchMovie = {
 
 export type TrailerType = {
   id: number;
-  results: [];
+  results: { key: string; name: string }[];
 };
 
 export type MoreMoviesType = {

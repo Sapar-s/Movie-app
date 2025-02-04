@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Genre } from "@/utils/types";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fetchData } from "./FetchData";
 import { Badge } from "@/components/ui/badge";
