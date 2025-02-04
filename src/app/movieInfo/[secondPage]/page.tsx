@@ -177,7 +177,7 @@ const SecondPage = async (props: {
               More like this
             </h3>
             <Link href={`/moreLike/${secondPage}`}>
-              <button className="flex text-[14px] items-center gap-2">
+              <button className="flex text-[14px] items-center hover:underline gap-2">
                 See more <ArrowRight className="w-4 h-4 " />
               </button>
             </Link>

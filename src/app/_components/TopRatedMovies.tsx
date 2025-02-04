@@ -17,7 +17,7 @@ export const TopRated = async () => {
           Top Rated
         </h2>
         <Link href="/seeMore/top_rated">
-          <button className="flex text-[14px] items-center gap-2">
+          <button className="flex text-[14px] items-center gap-2 hover:underline ">
             See more <ArrowRight className="w-4 h-4 " />
           </button>{" "}
         </Link>

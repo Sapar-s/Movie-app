@@ -73,7 +73,7 @@ export default function Search() {
                   <div className="flex justify-between w-[454px]  ">
                     <small>{movie?.release_date.slice(0, 4)}</small>
                     <div>
-                      <button className="flex text-[14px] items-center gap-2 ">
+                      <button className="flex text-[14px] hover:underline items-center gap-2 ">
                         See more <ArrowRight className="w-4 h-4 " />
                       </button>
                     </div>
