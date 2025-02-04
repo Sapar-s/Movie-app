@@ -36,7 +36,7 @@ export default function Page() {
         <h2 className="text-[30px] leading-[36px] font-[600] text-[#09090B] text-foreground ">
           Search Filter
         </h2>
-        <Filter />
+        <Filter border=" border-r-[1px]" pad="pr-10" />
       </div>
       <div className="ml-10 mt-[64px]">
         <h4 className=" flex gap-2 text-[20px] font-[600] leading-[28px] ">

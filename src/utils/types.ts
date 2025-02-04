@@ -31,3 +31,9 @@ export type TrailerType = {
   id: number;
   results: [];
 };
+
+export type MoreMoviesType = {
+  status_code: number;
+  status_message: string;
+  success: boolean;
+};

@@ -28,17 +28,18 @@ export const Hero = () => {
   const [comeTrailer, setComeTrailer] = useState<TrailerType | any | null>(
     null
   );
-  console.log(comeTrailer);
 
   useEffect(() => {
     const getDatas = async () => {
-      const hero = "/movie/now_playing?language=en-US&page=1";
-      const heroMovies = await fetchData(hero);
+      const heroMovies = await fetchData(
+        "/movie/now_playing?language=en-US&page=1"
+      );
 
-      const trailer = `/movie/${heroMovies.results.map(
-        (movie: MovieType) => movie.id
-      )}/videos?language=en-US`;
-      const comeTrailer = await fetchData(trailer);
+      const comeTrailer = await fetchData(
+        `/movie/${heroMovies.results.map(
+          (movie: MovieType) => movie.id
+        )}/videos?language=en-US`
+      );
       setHeroMovies(heroMovies);
       setComeTrailer(comeTrailer);
     };

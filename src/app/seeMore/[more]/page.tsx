@@ -1,14 +1,22 @@
+"use client";
+
 import { fetchData } from "@/app/_components/FetchData";
 import { MoviePagination } from "@/app/_components/MoviePagination";
 import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default async function MoreMovie(props: {
+export default function MoreMovie(props: {
   params: Promise<{ more: string }>;
 }) {
-  const { more } = await props.params;
+  const [more, setMore] = useState<any>(null);
+  const [moreMovies, setMoreMovies] = useState<any>(null);
+  const searchParams = useSearchParams();
+  const pages = searchParams.get("page");
+
   const title = () => {
     if (more === "popular") {
       return "Popular";
@@ -19,12 +27,17 @@ export default async function MoreMovie(props: {
     }
   };
 
-  // const pages = () => {
-  //   return "1";
-  // };
-  const getMovies = `/movie/${more}?language=en-US&page=1`;
-  const moreMovies = await fetchData(getMovies);
-  // console.log(moreMovies);
+  useEffect(() => {
+    const getDatas = async () => {
+      const { more } = await props.params;
+      const moreMovies = await fetchData(
+        `/movie/${more}?language=en-US&page=${pages ? pages : 1}`
+      );
+      setMore(more);
+      setMoreMovies(moreMovies);
+    };
+    getDatas();
+  }, [pages]);
 
   return (
     <div className="w-[100vw] flex justify-center ">
@@ -33,7 +46,7 @@ export default async function MoreMovie(props: {
           {title()}
         </h2>
         <div className="max-w-[1277px] w-full flex flex-wrap gap-[31px] justify-center mt-9 ">
-          {moreMovies.results.map((movie: MovieType, index: number) => {
+          {moreMovies?.results.map((movie: MovieType, index: number) => {
             return (
               <Link href={`/movieInfo/${movie.id}`} key={index}>
                 <div className="rounded-lg overflow-hidden">
@@ -59,8 +72,8 @@ export default async function MoreMovie(props: {
           })}
           <div className="max-w-[1277px] w-full flex justify-end ">
             <MoviePagination
-              totalPages={moreMovies.total_pages}
-              currentPage={moreMovies.page}
+              totalPages={moreMovies?.total_pages}
+              currentPage={moreMovies?.page}
             />
           </div>
         </div>

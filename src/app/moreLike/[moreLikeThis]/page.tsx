@@ -1,18 +1,34 @@
+"use client";
+
 import { fetchData } from "@/app/_components/FetchData";
 import { MoviePagination } from "@/app/_components/MoviePagination";
 import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default async function MoreMovie(props: {
+export default function MoreMovie(props: {
   params: Promise<{ moreLikeThis: string }>;
 }) {
-  const { moreLikeThis } = await props.params;
-  const moreMovies = await fetchData(
-    `/movie/${moreLikeThis}/similar?language=en-US&page=1`
-  );
-  console.log(moreMovies);
+  const [moreMovies, setMoreMovies] = useState<any>(null);
+  const searchParams = useSearchParams();
+  const pages = searchParams.get("page");
+  console.log({ moreMovies });
+
+  useEffect(() => {
+    const getDatas = async () => {
+      const { moreLikeThis } = await props.params;
+      const moreMovies = await fetchData(
+        `/movie/${moreLikeThis}/similar?language=en-US&page=${
+          pages ? pages : 1
+        }`
+      );
+      setMoreMovies(moreMovies);
+    };
+    getDatas();
+  }, [pages]);
 
   return (
     <div className="w-[100vw] flex flex-col items-center ">
@@ -21,7 +37,7 @@ export default async function MoreMovie(props: {
           More Like This
         </h2>
         <div className="max-w-[1277px] w-full flex justify-center flex-wrap gap-[32px] mt-9 ">
-          {moreMovies.results.map((movie: MovieType, index: number) => {
+          {moreMovies?.results?.map((movie: MovieType, index: number) => {
             return (
               <div key={index}>
                 <Link href={`/movieInfo/${movie.id}`}>
@@ -52,8 +68,8 @@ export default async function MoreMovie(props: {
           })}
           <div className="max-w-[1277px] w-full flex justify-end ">
             <MoviePagination
-              totalPages={moreMovies.total_pages}
-              currentPage={moreMovies.page}
+              totalPages={moreMovies?.total_pages}
+              currentPage={moreMovies?.page}
             />
           </div>
         </div>

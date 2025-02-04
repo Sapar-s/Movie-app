@@ -1,7 +1,6 @@
 "use client";
 
 import { fetchData } from "@/app/_components/FetchData";
-import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -12,36 +11,25 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { ConImg } from "@/utils/constants";
-import { Genre, MovieType, SearchMovie } from "@/utils/types";
+import { MovieType, SearchMovie } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Filter } from "../_components/Filter";
 
 export default function Search() {
   const searchParams = useSearchParams();
   const value = searchParams.get("value");
 
   const [getSearched, setGetSearched] = useState<SearchMovie | null>(null);
-  // const [getGenres, setGetGenres] = useState<any>("");
-  const [genres, setGenres] = useState<Genre[] | null>(null);
 
   useEffect(() => {
     const GetDatas = async () => {
       const getSearched = await fetchData(
         `/search/movie?query=${value}&language=en-US&page=1`
       );
-      // console.log("getsearchedd", getSearched);
       setGetSearched(getSearched);
-      // const getGenres = `/discover/movie?language=en&with_genres=${value}&page=1`;
-
-      // const selectGenres = await fetchData(getGenres);
-
-      const { genres } = await fetchData("/genre/movie/list?language=en");
-      setGenres(genres);
-      // const selectedGenre = genres.find(
-      //   (genre: { id: string; name: string }) => genre.id == value
-      // );
     };
     GetDatas();
   }, []);
@@ -111,30 +99,7 @@ export default function Search() {
           </div>
         </div>
         <div>
-          <div className="w-[387px] mt-8 border-l-[1px] border-border pl-11 h-[100vh] sticky top-[110px] ">
-            <h3 className="text-[24px] leading-[32px] font-[600] text-[#09090B] text-foreground ">
-              Search by genre
-            </h3>
-            <h4 className="text-[16px] leading-[24px] font-[400] text-[#09090B] text-foreground ">
-              See lists of movies by genre
-            </h4>
-            <div className="flex flex-wrap gap-4 mt-4 ">
-              {genres?.map((genre: Genre, index: number) => {
-                return (
-                  <Link key={index} href={`/search/${genre.id}`}>
-                    <Button
-                      key={index}
-                      variant="outline"
-                      className="py-[2px] pl-[10px] pr-1 h-[22px] rounded-full text-[12px] font-[600] leading-[16px] "
-                    >
-                      {genre.name}
-                      <img src="/rightArrow.svg" alt="" />
-                    </Button>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
+          <Filter border=" border-l-[1px]" pad="pl-10" />
         </div>
       </div>
     </>

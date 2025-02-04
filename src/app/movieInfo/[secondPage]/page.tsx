@@ -17,8 +17,8 @@ const SecondPage = async (props: {
 }) => {
   const { secondPage } = await props.params;
 
-  const movieDetail = `/movie/${secondPage}?language=en-US`;
-  const movie = await fetchData(movieDetail);
+  const movie = await fetchData(`/movie/${secondPage}?language=en-US`);
+  console.log({ movie });
 
   const minut = movie.runtime % 60;
   const hour = Math.floor(movie.runtime / 60);

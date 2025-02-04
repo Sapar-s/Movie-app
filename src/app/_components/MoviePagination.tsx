@@ -36,9 +36,7 @@ export const MoviePagination = ({
     }
   };
   return (
-    <div
-    // className="w-[100vw] flex justify-end mt-8 "
-    >
+    <div>
       <Pagination className="">
         <PaginationContent>
           {currentPage > 1 && (
