@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SearchFilter } from "../_components/SearchFilter";
-import { MoviePagination } from "../_components/MoviePagination";
+// import { MoviePagination } from "../_components/MoviePagination";
 
 export default function Search() {
   const searchParams = useSearchParams();

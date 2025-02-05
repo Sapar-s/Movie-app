@@ -3,7 +3,6 @@
 import { Genre } from "@/utils/types";
 import { useEffect, useState } from "react";
 import { fetchData } from "./FetchData";
-import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
