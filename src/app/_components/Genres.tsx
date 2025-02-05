@@ -9,12 +9,12 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Genre } from "@/utils/types";
-import { Badge } from "@/components/ui/badge";
 import {
   //  usePathname,
   useRouter,
   useSearchParams,
 } from "next/navigation";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export const Genres = () => {
   const [genres, setGenres] = useState<[] | null>(null);
@@ -31,8 +31,12 @@ export const Genres = () => {
     getDatas();
   }, []);
 
-  const handleClick = (genreId: number) => {
-    router.push(`/genres?page=1&genreIds=${genreId}`);
+  // const handleClick = (genreId: number) => {
+  //   router.push(`/genres?page=1&genreIds=${genreId}`);
+  // };
+  const handleChange = (values: string[]) => {
+    // console.log(values);
+    router.push(`/genres?page=1&genreIds=${values}`);
   };
 
   return (
@@ -53,22 +57,30 @@ export const Genres = () => {
           <h4 className="text-[16px] font-[400] leading-[24px] mt-1 border-b-[1px] pb-4 border-border ">
             See lists of movies by genre
           </h4>
-
-          <div className="flex flex-wrap gap-4 mt-4 ">
-            {genres?.map((genre: Genre, index: number) => {
-              return (
-                <Badge
-                  key={index}
-                  onClick={() => handleClick(genre.id)}
-                  variant={genre.id == Number(genreIds) ? "default" : "outline"}
-                  className="py-[2px] pl-[10px] pr-1 h-[22px] rounded-full cursor-pointer "
-                >
-                  {genre?.name}
-                  <img src="/rightArrow.svg" alt="" />
-                </Badge>
-              );
-            })}
-          </div>
+          <ToggleGroup
+            value={genreIds?.split(",")}
+            type="multiple"
+            className="flex flex-col items-start"
+            onValueChange={handleChange}
+            variant={"outline"}
+          >
+            <div className="flex flex-wrap gap-4 mt-4 ">
+              {genres?.map((genre: Genre, index: number) => {
+                return (
+                  <ToggleGroupItem
+                    key={index}
+                    value={genre.id.toString()}
+                    className="py-[2px] pl-[10px] pr-1 h-[22px] rounded-full cursor-pointer border-[1px] border-[#E4E4E7] data-[state=on]:bg-black data-[state=on]:text-white "
+                  >
+                    <h5 className="font-[600] text-[12px] leading-[16px] ">
+                      {genre?.name}
+                    </h5>
+                    <img src="/rightArrow.svg" alt="" />
+                  </ToggleGroupItem>
+                );
+              })}
+            </div>{" "}
+          </ToggleGroup>
         </PopoverContent>
       </Popover>
     </>

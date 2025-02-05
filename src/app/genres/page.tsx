@@ -8,16 +8,20 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Filter } from "../_components/Filter";
+import { MoviePagination } from "../_components/MoviePagination";
 
 export default function Page() {
   const [selectGenres, setSelectGenres] = useState<SearchMovie | null>(null);
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   const searchParams = useSearchParams();
   const genreIds = searchParams.get("genreIds");
+  const pages = searchParams.get("page");
 
   useEffect(() => {
     const getDatas = async () => {
-      const getGenres = `/discover/movie?language=en&with_genres=${genreIds}&page=1`;
+      const getGenres = `/discover/movie?language=en&with_genres=${genreIds}&page=${
+        pages ? pages : 1
+      }`;
       const selectGenres = await fetchData(getGenres);
       const { genres } = await fetchData("/genre/movie/list?language=en");
       const selectedGenre = genres.find(
@@ -28,7 +32,7 @@ export default function Page() {
       setSelectedGenre(selectedGenre);
     };
     getDatas();
-  }, [genreIds]);
+  }, [genreIds, pages]);
 
   return (
     <div className="flex mt-[52px] justify-center">
@@ -71,6 +75,12 @@ export default function Page() {
               </Link>
             );
           })}
+          <div className="max-w-[1277px] w-full flex justify-end ">
+            <MoviePagination
+              totalPages={selectGenres?.total_pages || 10}
+              currentPage={selectGenres?.page || 1}
+            />
+          </div>
         </div>
       </div>
     </div>

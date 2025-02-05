@@ -25,15 +25,33 @@ export const MoviePagination = ({
   const genreIds = searchParams.get("genreIds");
 
   const goToPage = (page: number) => {
-    {
-      searchValue == null
-        ? router.push(`?page=${page}`)
-        : genreIds == null
-        ? router.push(`?searchValue=${searchValue}&page=${page}`)
-        : router.push(
-            `?searchValue=${searchValue}&genreIds=${genreIds}&page=${page}`
-          );
+    console.log({ genreIds });
+
+    if (searchValue == null) {
+      if (genreIds) {
+        router.push(`?genreIds=${genreIds}&page=${page}`);
+      } else {
+        router.push(`?page=${page}`);
+      }
+    } else {
+      if (genreIds) {
+        router.push(
+          `?searchValue=${searchValue}&genreIds=${genreIds}&page=${page}`
+        );
+      } else {
+        router.push(`?searchValue=${searchValue}&page=${page}`);
+      }
     }
+
+    // {
+    //   searchValue == null
+    //     ? router.push(`?page=${page}`)
+    //     : genreIds == null
+    //     ? router.push(`?searchValue=${searchValue}&page=${page}`)
+    //     : router.push(
+    //         `?searchValue=${searchValue}&genreIds=${genreIds}&page=${page}`
+    //       );
+    // }
   };
   return (
     <div>
