@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ConImg } from "@/utils/constants";
-import { Genre, MovieType } from "@/utils/types";
+import { Genre, MovieType, VideoType } from "@/utils/types";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,12 +18,18 @@ const SecondPage = async (props: {
   const { secondPage } = await props.params;
 
   const movie = await fetchData(`/movie/${secondPage}?language=en-US`);
+  const directors = await fetchData(
+    `/movie/${secondPage}/credits?language=en-US`
+  );
+  const moreMovies = await fetchData(
+    `/movie/${secondPage}/similar?language=en-US&page=1`
+  );
+  const getTrailer = await fetchData(
+    `/movie/${secondPage}/videos?language=en-US`
+  );
 
   const minut = movie.runtime % 60;
   const hour = Math.floor(movie.runtime / 60);
-
-  const director = `/movie/${secondPage}/credits?language=en-US`;
-  const directors = await fetchData(director);
 
   const writers = job();
 
@@ -37,12 +43,16 @@ const SecondPage = async (props: {
     );
     return workers;
   }
-
-  const more = `/movie/${secondPage}/similar?language=en-US&page=1`;
-  const moreMovies = await fetchData(more);
-
-  const trailer = `/movie/${secondPage}/videos?language=en-US`;
-  const comeTrailer = await fetchData(trailer);
+  function trailerKey() {
+    if (getTrailer?.results?.length) {
+      const trailer = getTrailer.results.find(
+        (video: VideoType) => video.type === "Trailer"
+      );
+      if (trailer) {
+        return trailer.key;
+      }
+    }
+  }
 
   return (
     <div>
@@ -109,11 +119,11 @@ const SecondPage = async (props: {
               </div>
               <DialogContent className=" border-none p-0 m-0 bg-none w-[997px] max-w-full">
                 <iframe
-                  src={`https://www.youtube.com/embed/${comeTrailer.results[0]?.key}`}
+                  src={`https://www.youtube.com/embed/${trailerKey()}`}
                   width={997}
                   height={561}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  title={comeTrailer.results[0]?.name}
+                  title={getTrailer.results[0]?.name}
                   allowFullScreen
                 ></iframe>
                 <DialogTitle className="hidden"></DialogTitle>

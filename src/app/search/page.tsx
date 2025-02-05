@@ -1,22 +1,14 @@
 "use client";
 
 import { fetchData } from "@/app/_components/FetchData";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 import { ConImg } from "@/utils/constants";
 import { MovieType, SearchMovie } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Filter } from "../_components/Filter";
+import { SearchFilter } from "../_components/SearchFilter";
+import { MoviePagination } from "../_components/MoviePagination";
 
 export default function Search() {
   const searchParams = useSearchParams();
@@ -72,7 +64,7 @@ export default function Search() {
                 </Link>
               );
             })}
-            <Pagination className="w-[100vw] flex justify-end mt-8">
+            {/* <Pagination className="w-[100vw] flex justify-end mt-8">
               <PaginationContent>
                 <PaginationItem>
                   <PaginationPrevious href="#" />
@@ -95,11 +87,18 @@ export default function Search() {
                   <PaginationNext href="#" />
                 </PaginationItem>
               </PaginationContent>
-            </Pagination>
+            </Pagination> */}
+
+            <div className="max-w-[1277px] w-full flex justify-end ">
+              {/* <MoviePagination
+                          totalPages={selectGenres?.total_pages || 10}
+                          currentPage={selectGenres?.page || 1}
+                        /> */}
+            </div>
           </div>
         </div>
         <div>
-          <Filter border=" border-l-[1px]" pad="pl-10" />
+          <SearchFilter />
         </div>
       </div>
     </>

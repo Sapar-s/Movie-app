@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-export const Filter = () => {
+export const SearchFilter = () => {
   const [genres, setGenres] = useState<[] | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -40,7 +40,7 @@ export const Filter = () => {
   return (
     <>
       <div
-        className={`w-[387px] mt-8 border-r-[1px] border-border pr-10 h-[500px] sticky top-[110px] `}
+        className={`w-[387px] mt-8 border-l-[1px] border-border pl-10  h-[500px] sticky top-[110px] `}
       >
         <ToggleGroup
           type="multiple"

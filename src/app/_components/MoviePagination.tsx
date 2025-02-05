@@ -25,8 +25,6 @@ export const MoviePagination = ({
   const genreIds = searchParams.get("genreIds");
 
   const goToPage = (page: number) => {
-    console.log({ genreIds });
-
     if (searchValue == null) {
       if (genreIds) {
         router.push(`?genreIds=${genreIds}&page=${page}`);
