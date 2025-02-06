@@ -8,10 +8,12 @@ import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
   const [searched, setSearched] = useState([]);
+  const router = useRouter();
 
   const searchHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value.toLowerCase();
@@ -24,6 +26,12 @@ export default function Search() {
     setSearched(searchData.results);
   };
   const clearInput = () => {
+    setSearchValue("");
+    setSearched([]);
+  };
+
+  const linkHandler = () => {
+    router.push(`/search?value=${searchValue}`);
     setSearchValue("");
     setSearched([]);
   };
@@ -83,14 +91,14 @@ export default function Search() {
             </Link>
           ))}
           <div className="h-[40px] py-2 px-4 flex items-end ">
-            <Link href={`/search?value=${searchValue}`}>
-              <button
-                onClick={clearInput}
-                className="text-[14px] leading-[20px] font-[500] "
-              >
-                See all results for &#34;{searchValue}&#34;
-              </button>
-            </Link>
+            {/* <Link href={`/search?value=${searchValue}`}> */}
+            <button
+              onClick={linkHandler}
+              className="text-[14px] leading-[20px] font-[500] "
+            >
+              See all results for &#34;{searchValue}&#34;
+            </button>
+            {/* </Link> */}
           </div>
         </div>
       )}

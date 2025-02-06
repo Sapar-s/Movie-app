@@ -12,6 +12,7 @@ export const SearchFilter = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const genreIds = searchParams.get("genreIds");
+  const value = searchParams.get("value");
   // console.log(genreIds);
 
   useEffect(() => {
@@ -23,17 +24,9 @@ export const SearchFilter = () => {
     getDatas();
   }, []);
 
-  // const handleClick = (genreId: number) => {
-  //   const params = new URLSearchParams();
-  //   params.set("genreIds", `${genreIds}, ${genreId.toString()}`);
-  //   params.set("page", "1");
-  //   router.push(`?${params.toString()}`);
-  //   // router.push(`/genres?page=1&genreIds=${genreId}`);
-  // };
-
   const handleChange = (values: string[]) => {
     // console.log(values);
-    router.push(`/genres?page=1&genreIds=${values}`);
+    router.push(`/search?page=1&genreIds=${values}&value=${value}`);
   };
 
   return (
