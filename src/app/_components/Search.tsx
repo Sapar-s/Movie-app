@@ -8,19 +8,23 @@ import { ConImg } from "@/utils/constants";
 import { MovieType } from "@/utils/types";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
   const [searched, setSearched] = useState([]);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pages = searchParams.get("page");
 
   const searchHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value.toLowerCase();
     setSearchValue(search);
 
     const searchData = await fetchData(
-      `/search/movie?query=${e.target.value}&language=en-US&page=1`
+      `/search/movie?query=${e.target.value}&language=en-US&page=${
+        pages ? pages : 1
+      }`
     );
 
     setSearched(searchData.results);

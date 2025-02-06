@@ -7,52 +7,76 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { SearchFilter } from "../_components/SearchFilter";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-// import { MoviePagination } from "../_components/MoviePagination";
+import { MoviePagination } from "../_components/MoviePagination";
 
 export default function Search() {
+  const [getSearched, setGetSearched] = useState<MovieType[] | null>(null);
+  const [genres, setGenres] = useState<Genre[] | null>(null);
+  const [fetchedMovies, setFetchedMovies] = useState<SearchMovie | null>(null);
   const searchParams = useSearchParams();
-  const value = searchParams.get("value");
-  const genreIds = searchParams.get("genreIds");
+  const value = searchParams.get("value") || "";
+  const genreIds = searchParams.get("genreIds") || "";
+  const page = searchParams.get("page") || "1";
   const router = useRouter();
-  const [getSearched, setGetSearched] = useState<MovieType[]>([]);
-  const [genres, setGenres] = useState<[] | null>(null);
-  const [values, setValues] = useState<any>(null);
 
   useEffect(() => {
     const GetDatas = async () => {
-      const genreIdsNumber = values?.split(",");
-      if (genreIds) {
+      try {
+        if (!value) return;
+        console.log("Fetching movies for:", value);
+
         const getSearchedData = await fetchData(
-          `/search/movie?query=${value}&language=en-US&page=1`
+          `/search/movie?query=${value}&language=en-US&page=${page}`
         );
-        const genreFilteredMovies = getSearchedData.results.filter(
-          (movie: MovieType) =>
-            genreIdsNumber.some((id) =>
-              movie.genre_ids.includes(Number(id) as never)
-            )
-        );
-        setGetSearched({ ...getSearchedData, results: genreFilteredMovies });
-      } else {
-        const getSearchedData = await fetchData(
-          `/search/movie?query=${value}&language=en-US&page=1`
-        );
-        setGetSearched(getSearchedData);
+        console.log("Fetched movies:", getSearchedData);
+        setFetchedMovies(getSearchedData);
+        let filteredMovies = getSearchedData.results || [];
+
+        if (genreIds) {
+          const genreIdsNumber = genreIds.split(",").map(Number);
+          filteredMovies = filteredMovies.filter((movie: MovieType) =>
+            genreIdsNumber.every((id) => movie.genre_ids.includes(id))
+          );
+        }
+
+        setGetSearched(filteredMovies);
+        const genreData = await fetchData("/genre/movie/list?language=en");
+        console.log("Fetched genres:", genreData);
+        setGenres(genreData.genres || []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-
-      const { genres } = await fetchData("/genre/movie/list?language=en");
-
-      setGenres(genres);
     };
-    GetDatas();
-  }, [searchParams, genreIds]);
 
-  const handleChange = (values: string[]) => {
-    // console.log(values);
-    router.push(`/search?page=1&genreIds=${values}&value=${value}`);
-    setValues(values);
+    GetDatas();
+  }, [value, genreIds, page]);
+  console.log("only first page => ", getSearched);
+  console.log("all pages results & movies", fetchedMovies);
+
+  const handleChange = (selectedGenres: string[]) => {
+    const newGenreIds =
+      selectedGenres.length > 0 ? selectedGenres.join(",") : null;
+    const queryParams = new URLSearchParams();
+
+    if (newGenreIds) queryParams.append("genreIds", newGenreIds);
+    if (value) queryParams.append("value", value);
+    queryParams.append("page", "1");
+
+    console.log("Updated URL:", `/search?${queryParams.toString()}`);
+    router.push(`/search?${queryParams.toString()}`);
   };
+
+  // const handlePageChange = (newPage: number) => {
+  //   const queryParams = new URLSearchParams();
+
+  //   if (genreIds) queryParams.append("genreIds", genreIds);
+  //   if (value) queryParams.append("value", value);
+  //   queryParams.append("page", newPage.toString());
+
+  //   console.log("Changing page:", newPage);
+  //   router.push(`/search?${queryParams.toString()}`);
+  // };
   return (
     <>
       <div className="flex gap-11 justify-center">
@@ -62,9 +86,11 @@ export default function Search() {
           </h2>
           <h4 className=" flex gap-2 text-[20px] font-[600] leading-[28px] mt-8 ">
             {getSearched?.length} results for &#34;{value}&#34;
+            {/* {fetchedMovies?.total_results} results for &#34;{value}&#34; */}
           </h4>
           <div className="max-w-[806px] w-full flex justify-center flex-wrap gap-[48px]   mt-9 ">
             {getSearched?.map((movie: MovieType, index: number) => {
+              // {fetchedMovies?.results?.map((movie: MovieType, index: number) => {
               return (
                 <Link href={`/movieInfo/${movie.id}`} key={index}>
                   <div className="rounded-lg overflow-hidden">
@@ -93,16 +119,14 @@ export default function Search() {
             })}
 
             <div className="max-w-[1277px] w-full flex justify-end ">
-              {/* <MoviePagination
-                          totalPages={selectGenres?.total_pages || 10}
-                          currentPage={selectGenres?.page || 1}
-                        /> */}
+              <MoviePagination
+                totalPages={fetchedMovies?.total_pages || 10}
+                currentPage={fetchedMovies?.page || 1}
+              />
             </div>
           </div>
         </div>
         <div>
-          <SearchFilter />
-
           <div
             className={`w-[387px] mt-8 border-l-[1px] border-border pl-10  h-[500px] sticky top-[110px] `}
           >
@@ -111,7 +135,7 @@ export default function Search() {
               className="flex flex-col items-start"
               onValueChange={handleChange}
               variant={"outline"}
-              value={genreIds?.split(",")}
+              value={genreIds ? genreIds?.split(",") : []}
             >
               <h3 className="text-[24px] leading-[32px] font-[600] text-[#09090B] text-foreground ">
                 Genres
