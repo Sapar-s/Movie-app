@@ -22,28 +22,26 @@ export default function Search() {
 
   useEffect(() => {
     const GetDatas = async () => {
-      try {
-        if (!value) return;
+      if (!value) return;
 
-        const getSearchedData = await fetchData(
-          `/search/movie?query=${value}&language=en-US&page=${page}`
+      const getSearchedData = await fetchData(
+        `/search/movie?query=${value}&language=en-US&page=${page}`
+      );
+
+      setFetchedMovies(getSearchedData);
+      let filteredMovies = getSearchedData.results || [];
+
+      if (genreIds) {
+        const genreIdsNumber = genreIds.split(",").map(Number);
+        filteredMovies = filteredMovies.filter((movie: MovieType) =>
+          genreIdsNumber.every((id) => movie.genre_ids.includes(id))
         );
+      }
 
-        setFetchedMovies(getSearchedData);
-        let filteredMovies = getSearchedData.results || [];
+      setGetSearched(filteredMovies);
+      const genreData = await fetchData("/genre/movie/list?language=en");
 
-        if (genreIds) {
-          const genreIdsNumber = genreIds.split(",").map(Number);
-          filteredMovies = filteredMovies.filter((movie: MovieType) =>
-            genreIdsNumber.every((id) => movie.genre_ids.includes(id))
-          );
-        }
-
-        setGetSearched(filteredMovies);
-        const genreData = await fetchData("/genre/movie/list?language=en");
-
-        setGenres(genreData.genres || []);
-      } catch (error) {}
+      setGenres(genreData.genres || []);
     };
 
     GetDatas();
