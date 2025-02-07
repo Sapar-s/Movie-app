@@ -21,7 +21,7 @@ export const MoviePagination = ({
   const router = useRouter();
 
   const searchParams = useSearchParams();
-  const searchValue = searchParams.get("searchValue");
+  const searchValue = searchParams.get("value");
   const genreIds = searchParams.get("genreIds");
 
   const goToPage = (page: number) => {
@@ -33,11 +33,9 @@ export const MoviePagination = ({
       }
     } else {
       if (genreIds) {
-        router.push(
-          `?searchValue=${searchValue}&genreIds=${genreIds}&page=${page}`
-        );
+        router.push(`?value=${searchValue}&genreIds=${genreIds}&page=${page}`);
       } else {
-        router.push(`?searchValue=${searchValue}&page=${page}`);
+        router.push(`?value=${searchValue}&page=${page}`);
       }
     }
 
@@ -57,18 +55,12 @@ export const MoviePagination = ({
         <PaginationContent>
           {currentPage > 1 && (
             <PaginationItem>
-              <PaginationPrevious
-                href="#"
-                onClick={() => goToPage(currentPage - 1)}
-              />
+              <PaginationPrevious onClick={() => goToPage(currentPage - 1)} />
             </PaginationItem>
           )}
           {currentPage > 1 && (
             <PaginationItem>
-              <PaginationLink
-                href="#"
-                onClick={() => goToPage(currentPage - 1)}
-              >
+              <PaginationLink onClick={() => goToPage(currentPage - 1)}>
                 {currentPage - 1}
               </PaginationLink>
             </PaginationItem>
@@ -81,10 +73,7 @@ export const MoviePagination = ({
 
           {currentPage < totalPages && totalPages > 1 && (
             <PaginationItem>
-              <PaginationLink
-                href="#"
-                onClick={() => goToPage(currentPage + 1)}
-              >
+              <PaginationLink onClick={() => goToPage(currentPage + 1)}>
                 {currentPage + 1}
               </PaginationLink>
             </PaginationItem>
@@ -92,10 +81,7 @@ export const MoviePagination = ({
 
           {currentPage == 1 && totalPages > 1 && (
             <PaginationItem>
-              <PaginationLink
-                href="#"
-                onClick={() => goToPage(currentPage + 2)}
-              >
+              <PaginationLink onClick={() => goToPage(currentPage + 2)}>
                 {currentPage + 2}
               </PaginationLink>
             </PaginationItem>
@@ -108,10 +94,7 @@ export const MoviePagination = ({
           )}
           {currentPage < totalPages && (
             <PaginationItem>
-              <PaginationNext
-                href="#"
-                onClick={() => goToPage(currentPage + 1)}
-              />
+              <PaginationNext onClick={() => goToPage(currentPage + 1)} />
             </PaginationItem>
           )}
         </PaginationContent>

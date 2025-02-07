@@ -9,11 +9,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Genre } from "@/utils/types";
-import {
-  //  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export const Genres = () => {
@@ -31,11 +27,7 @@ export const Genres = () => {
     getDatas();
   }, []);
 
-  // const handleClick = (genreId: number) => {
-  //   router.push(`/genres?page=1&genreIds=${genreId}`);
-  // };
   const handleChange = (values: string[]) => {
-    // console.log(values);
     router.push(`/genres?page=1&genreIds=${values}`);
   };
 

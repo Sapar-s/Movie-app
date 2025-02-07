@@ -24,12 +24,11 @@ export default function Search() {
     const GetDatas = async () => {
       try {
         if (!value) return;
-        console.log("Fetching movies for:", value);
 
         const getSearchedData = await fetchData(
           `/search/movie?query=${value}&language=en-US&page=${page}`
         );
-        console.log("Fetched movies:", getSearchedData);
+
         setFetchedMovies(getSearchedData);
         let filteredMovies = getSearchedData.results || [];
 
@@ -42,17 +41,13 @@ export default function Search() {
 
         setGetSearched(filteredMovies);
         const genreData = await fetchData("/genre/movie/list?language=en");
-        console.log("Fetched genres:", genreData);
+
         setGenres(genreData.genres || []);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     };
 
     GetDatas();
   }, [value, genreIds, page]);
-  console.log("only first page => ", getSearched);
-  console.log("all pages results & movies", fetchedMovies);
 
   const handleChange = (selectedGenres: string[]) => {
     const newGenreIds =
@@ -61,25 +56,13 @@ export default function Search() {
 
     if (newGenreIds) queryParams.append("genreIds", newGenreIds);
     if (value) queryParams.append("value", value);
-    queryParams.append("page", "1");
+    queryParams.append("page", page);
 
-    console.log("Updated URL:", `/search?${queryParams.toString()}`);
     router.push(`/search?${queryParams.toString()}`);
   };
-
-  // const handlePageChange = (newPage: number) => {
-  //   const queryParams = new URLSearchParams();
-
-  //   if (genreIds) queryParams.append("genreIds", genreIds);
-  //   if (value) queryParams.append("value", value);
-  //   queryParams.append("page", newPage.toString());
-
-  //   console.log("Changing page:", newPage);
-  //   router.push(`/search?${queryParams.toString()}`);
-  // };
   return (
     <>
-      <div className="flex gap-11 justify-center">
+      <div className="flex gap-11 justify-center min-h-screen ">
         <div>
           <h2 className="text-[30px] leading-[36px] font-[600] mt-[52px] ">
             Search results

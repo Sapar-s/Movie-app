@@ -13,7 +13,6 @@ export const SearchFilter = () => {
   const searchParams = useSearchParams();
   const genreIds = searchParams.get("genreIds");
   const value = searchParams.get("value");
-  // console.log(genreIds);
 
   useEffect(() => {
     const getDatas = async () => {
@@ -25,7 +24,6 @@ export const SearchFilter = () => {
   }, []);
 
   const handleChange = (values: string[]) => {
-    // console.log(values);
     router.push(`/search?page=1&genreIds=${values}&value=${value}`);
   };
 

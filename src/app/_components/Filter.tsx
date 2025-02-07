@@ -12,7 +12,6 @@ export const Filter = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const genreIds = searchParams.get("genreIds");
-  // console.log(genreIds);
 
   useEffect(() => {
     const getDatas = async () => {
@@ -23,16 +22,7 @@ export const Filter = () => {
     getDatas();
   }, []);
 
-  // const handleClick = (genreId: number) => {
-  //   const params = new URLSearchParams();
-  //   params.set("genreIds", `${genreIds}, ${genreId.toString()}`);
-  //   params.set("page", "1");
-  //   router.push(`?${params.toString()}`);
-  //   // router.push(`/genres?page=1&genreIds=${genreId}`);
-  // };
-
   const handleChange = (values: string[]) => {
-    // console.log(values);
     router.push(`/genres?page=1&genreIds=${values}`);
   };
 
