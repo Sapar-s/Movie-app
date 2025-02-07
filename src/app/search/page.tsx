@@ -67,11 +67,9 @@ export default function SearchPage() {
           </h2>
           <h4 className=" flex gap-2 text-[20px] font-[600] leading-[28px] mt-8 ">
             {getSearched?.length} results for &#34;{value}&#34;
-            {/* {fetchedMovies?.total_results} results for &#34;{value}&#34; */}
           </h4>
           <div className="max-w-[806px] w-full flex justify-center flex-wrap gap-[48px]   mt-9 ">
             {getSearched?.map((movie: MovieType, index: number) => {
-              // {fetchedMovies?.results?.map((movie: MovieType, index: number) => {
               return (
                 <Link href={`/movieInfo/${movie.id}`} key={index}>
                   <div className="rounded-lg overflow-hidden">

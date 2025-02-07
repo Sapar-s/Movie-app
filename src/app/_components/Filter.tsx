@@ -21,21 +21,8 @@ export const Filter = () => {
     };
     getDatas();
   }, []);
-
-  // const handleChange = (values: string[]) => {
-  //   router.push(`/genres?page=1&genreIds=${values}`);
-  // };
-
-  // const handleChange = (values: string[]) => {
-  //   // Сонгосон жанруудыг таслалтайгаар нийлүүлж, хоосон утга үүсэхээс сэргийлнэ
-  //   const genreString = values.length ? values.join(",") : ""; // Хэрвээ values хоосон байвал genreIds параметрийг цэвэрлэх
-  //   router.push(`/genres?page=1&genreIds=${genreString}`);
-  // };
-
   const handleChange = (values: string[]) => {
-    // Хэрвээ хоосон байвал genreIds параметрийг цэвэрлэх
     const genreString = values.length ? values.join(",") : "";
-    // Зөвхөн тодорхой жанр байгаа бол, буруу таслалтай URL үүсэхгүй
     router.push(`/genres?page=1&genreIds=${genreString}`);
   };
   return (

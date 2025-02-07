@@ -38,16 +38,6 @@ export const MoviePagination = ({
         router.push(`?value=${searchValue}&page=${page}`);
       }
     }
-
-    // {
-    //   searchValue == null
-    //     ? router.push(`?page=${page}`)
-    //     : genreIds == null
-    //     ? router.push(`?searchValue=${searchValue}&page=${page}`)
-    //     : router.push(
-    //         `?searchValue=${searchValue}&genreIds=${genreIds}&page=${page}`
-    //       );
-    // }
   };
   return (
     <div>
