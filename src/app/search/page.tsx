@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { MoviePagination } from "../_components/MoviePagination";
 
-export default function Search() {
+export default function SearchPage() {
   const [getSearched, setGetSearched] = useState<MovieType[] | null>(null);
   const [genres, setGenres] = useState<Genre[] | null>(null);
   const [fetchedMovies, setFetchedMovies] = useState<SearchMovie | null>(null);

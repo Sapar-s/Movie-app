@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { Filter } from "../_components/Filter";
 import { MoviePagination } from "../_components/MoviePagination";
 
-export default function Page() {
+export default function GenresPage() {
   const [selectGenres, setSelectGenres] = useState<SearchMovie | null>(null);
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   const searchParams = useSearchParams();
